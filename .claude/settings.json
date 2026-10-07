@@ -1,0 +1,58 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-prompt-log.js capture"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-prompt-log.js keep-read"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-prompt-log.js record"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-dashboard.js"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-format.js"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-prompt-log.js harvest"
+          },
+          {
+            "type": "command",
+            "command": "node .claude/itm-sdlc/scripts/hook-report.js"
+          }
+        ]
+      }
+    ]
+  }
+}

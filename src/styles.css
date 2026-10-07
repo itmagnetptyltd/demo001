@@ -1,0 +1,110 @@
+:root {
+  --sky: #8fd3ff;
+  --sunshine: #ffe680;
+  --card: #ffffff;
+  --ink: #2d2a6e;
+  --grape: #7b5cff;
+  --mint-fill: #f0fff8;
+  --mint-edge: #3ccf91;
+  --orange: #ff8a3d;
+  --orange-deep: #e5671a;
+  --lemon-fill: #fff9db;
+  --control-width: 100%;
+  --font-friendly: "Comic Sans MS", "Chalkboard SE", "Segoe UI Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--sky) 0%, var(--sunshine) 100%);
+  font-family: var(--font-friendly);
+  color: var(--ink);
+}
+
+main {
+  width: min(90vw, 360px);
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgb(45 42 110 / 20%);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+  text-align: center;
+  color: var(--grape);
+}
+
+label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+input {
+  width: var(--control-width);
+  padding: 12px 16px;
+  font: inherit;
+  font-size: 1.75rem;
+  text-align: center;
+  color: var(--ink);
+  background: var(--mint-fill);
+  border: 3px solid var(--mint-edge);
+  border-radius: 18px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--grape);
+  box-shadow: 0 0 0 4px rgb(123 92 255 / 25%);
+}
+
+button {
+  width: var(--control-width);
+  margin-top: 8px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: var(--orange);
+  border: 3px solid var(--orange-deep);
+  border-radius: 999px;
+  box-shadow: 0 6px 0 var(--orange-deep);
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--orange-deep);
+}
+
+output {
+  display: block;
+  width: var(--control-width);
+  min-height: 72px;
+  margin-top: 8px;
+  padding: 12px 16px;
+  font-size: 2.25rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--grape);
+  background: var(--lemon-fill);
+  border: 3px dashed var(--grape);
+  border-radius: 18px;
+}

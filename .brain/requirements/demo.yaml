@@ -1,0 +1,107 @@
+- id: REQ-DEMO-001
+  title: A single page shows two text boxes, one button and one answer label
+  module: DEMO
+  priority: must
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
+  version: 2
+  source: >-
+    BRIEF.md 2026-10-01 — "single page application ... just two text box and a
+    button, answer will be shown in a label"; CHG-0001 (FB-0001, 2026-10-01) —
+    "a beautiful background, noce add button and lebel textbox apearence is also
+    nice all aligned in same point"; alignment clarified as a centred column by
+    Kartik Chandra Biswas in build session 2026-10-01
+  rationale: >-
+    The calculator is for a child. The brief limits the screen to exactly these
+    four controls so there is nothing else to distract or confuse. FB-0001 asks
+    that those four controls look like something a child would like, on an
+    attractive background, lined up in one column.
+  acceptance:
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: Exactly two text boxes, one button and one answer label are visible on a single page
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: >-
+        The first text box, second text box, button and answer label are stacked
+        top to bottom in that order, and the horizontal centre of each is the
+        horizontal centre of the page
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: The page background is not plain white
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: >-
+        The button, each text box and the answer label each have a background
+        colour, a border and a font size that differ from the browser's default
+        for that control
+  ambiguities: []
+  belts: [A, B]
+  history:
+    - version: 1
+      agreed: 2026-10-01
+      superseded_by: 2
+      summary: >-
+        v1 required only that two text boxes, one button and one answer label be
+        visible on a single page, and said nothing about appearance or layout.
+        Verified 2026-10-01 by tests/calculator.spec.js and e2e/calculator.spec.js.
+        Superseded by CHG-0001 (absorbed), which adds a centred column, a
+        non-white background and styled controls.
+
+- id: REQ-DEMO-002
+  title: Pressing the button shows the sum of the two Numbers in the answer label
+  module: DEMO
+  priority: must
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
+  version: 1
+  source: BRIEF.md 2026-10-01 — "only can add two numbers ... giving right input just show them a simple addition"
+  rationale: The one and only purpose of the calculator is adding two Numbers.
+  acceptance:
+    - given: The first text box holds 3 and the second holds 4
+      when: The button is pressed
+      then: The answer label shows 7
+    - given: The first text box holds 0 and the second holds 5
+      when: The button is pressed
+      then: The answer label shows 5
+  ambiguities: []
+  depends_on:
+    - REQ-DEMO-001
+    - REQ-DEMO-003
+  belts: [A, B]
+
+- id: REQ-DEMO-003
+  title: Each text box accepts only whole Numbers of zero or more, so invalid input cannot be entered
+  module: DEMO
+  priority: must
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
+  version: 1
+  source: BRIEF.md 2026-10-01 — "no negative number will be acceptable, on we a whole number not decimal ... no way to get invalid input"
+  rationale: >-
+    The brief says invalid input must be impossible rather than reported. A
+    child should never see an error; they simply cannot type anything but a
+    whole Number.
+  acceptance:
+    - given: A text box is empty
+      when: The child types a minus sign
+      then: The text box remains empty
+    - given: A text box holds 12
+      when: The child types a decimal point
+      then: The text box still holds 12
+    - given: A text box is empty
+      when: The child types a letter
+      then: The text box remains empty
+    - given: A text box is empty
+      when: The child types 25
+      then: The text box holds 25
+  ambiguities: []
+  depends_on:
+    - REQ-DEMO-001
+  belts: [A, B]

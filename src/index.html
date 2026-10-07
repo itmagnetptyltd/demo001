@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Add two numbers</h1>
+    <label for="first-number">First Number</label>
+    <input id="first-number" type="text" inputmode="numeric" autocomplete="off">
+    <label for="second-number">Second Number</label>
+    <input id="second-number" type="text" inputmode="numeric" autocomplete="off">
+    <button id="add" type="button">Add</button>
+    <output id="answer" role="status" aria-label="Answer" for="first-number second-number"></output>
+  </main>
+</body>
+</html>

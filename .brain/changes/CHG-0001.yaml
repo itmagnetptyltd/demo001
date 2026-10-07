@@ -1,0 +1,31 @@
+id: CHG-0001
+raised: 2026-10-01
+stream: scope_change
+source: "FB-0001, message in build session 2026-10-01, Kartik Chandra Biswas"
+raw: "Design need to update as kids like this, a beautiful background, noce add button and lebel textbox apearence is also nice all aligned in same point"
+asks:
+  - "A1 An overall visual design that children like: not-covered (REQ-DEMO-001@v1 c1 fixes which controls exist, not how they look)"
+  - "A2 A beautiful background: not-covered (no criterion in REQ-DEMO-001/002/003 mentions background or colour)"
+  - "A3 A nicer-looking Add button: not-covered (REQ-DEMO-001@v1 c1 'one button'; REQ-DEMO-002@v1 c1-c2 cover only what pressing it does)"
+  - "A4 Nicer-looking answer label and text boxes: not-covered (REQ-DEMO-003@v1 c1-c4 cover only what the boxes accept)"
+  - "A5 All controls aligned to the same point: not-covered (REQ-DEMO-001@v1 c1 'visible on a single page' holds whatever the alignment)"
+affects: [REQ-DEMO-001]
+analysis:
+  dependants: [REQ-DEMO-002, REQ-DEMO-003]   # both depend_on REQ-DEMO-001
+  tests_invalidated: 2                       # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-001@v1, stale only if REQ-DEMO-001 moves to v2
+  constraint: >-
+    REQ-DEMO-001@v1 c1 requires exactly two text boxes, one button and one answer
+    label to be visible, and its rationale is "nothing else to distract". Styling
+    those four controls and the background does not conflict. Adding pictures,
+    mascots or other decoration would, and needs REQ-DEMO-001 superseded.
+  open_before_build: >-
+    "beautiful", "nice" and "kids like this" are not testable. Colours, font size,
+    and whether "aligned in same point" means one centred column or one shared left
+    edge must be stated before acceptance criteria can be written.
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-01; alignment set to one centred column"
+outcome:
+  - REQ-DEMO-001: v2
+  - REQ-DEMO-002: unchanged
+  - REQ-DEMO-003: unchanged

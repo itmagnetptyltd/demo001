@@ -1,0 +1,16 @@
+{
+  "name": "demo-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/calculator.spec.js",
+    "coverage": "node --test --experimental-test-coverage tests/calculator.spec.js",
+    "lint": "node --check src/calculator.js && node --check src/app.js && node --check src/server.js",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}
