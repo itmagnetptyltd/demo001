@@ -4,6 +4,7 @@
   --card: #ffffff;
   --ink: #2d2a6e;
   --grape: #7b5cff;
+  --grape-deep: #5a3fd6;
   --mint-fill: #f0fff8;
   --mint-edge: #3ccf91;
   --orange: #ff8a3d;
@@ -83,6 +84,28 @@ button {
   border-radius: 999px;
   box-shadow: 0 6px 0 var(--orange-deep);
   cursor: pointer;
+}
+
+.buttons {
+  width: var(--control-width);
+  display: flex;
+  gap: 12px;
+}
+
+.buttons button {
+  flex: 1;
+  min-width: 0;
+  padding-inline: 8px;
+}
+
+#subtract {
+  background: var(--grape);
+  border-color: var(--grape-deep);
+  box-shadow: 0 6px 0 var(--grape-deep);
+}
+
+#subtract:active {
+  box-shadow: 0 2px 0 var(--grape-deep);
 }
 
 button:hover {

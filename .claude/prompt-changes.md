@@ -168,3 +168,49 @@ Prompt: Add a new readme
 Files:
 - README.md
 
+## 2026-10-07T10:38:12.493Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0002.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+Done
+
+Files:
+- .brain/requirements/demo.yaml
+
+## 2026-10-07T10:38:13.570Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0002.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+Done
+
+Files:
+- .brain/requirements/demo.yaml
+
+## 2026-10-07T10:38:28.144Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0002.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+Done
+
+Files:
+- .brain/glossary.md
+
+## 2026-10-07T10:38:32.024Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0002.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+Done
+
+Files:
+- .brain/glossary.md
+
+## 2026-10-07T10:40:22.333Z
+
+Prompt: /feature-plan REQ-DEMO-001 REQ-DEMO-002
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-001-v3.md
+
+## 2026-10-07T10:46:40.348Z
+
+Prompt: /feature-plan REQ-DEMO-004
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-004.md
+
