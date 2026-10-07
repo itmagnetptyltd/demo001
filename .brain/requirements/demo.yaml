@@ -1,40 +1,50 @@
 - id: REQ-DEMO-001
-  title: A single page shows two text boxes, one button and one answer label
+  title: A single page shows two text boxes, an Add button, a Subtract button and one answer label
   module: DEMO
   priority: must
-  status: verified
-  verified_by:
-    - e2e/calculator.spec.js
-    - tests/calculator.spec.js
-  version: 2
+  status: agreed
+  version: 3
   source: >-
     BRIEF.md 2026-10-01 — "single page application ... just two text box and a
     button, answer will be shown in a label"; CHG-0001 (FB-0001, 2026-10-01) —
     "a beautiful background, noce add button and lebel textbox apearence is also
     nice all aligned in same point"; alignment clarified as a centred column by
-    Kartik Chandra Biswas in build session 2026-10-01
+    Kartik Chandra Biswas in build session 2026-10-01; CHG-0002 (FB-0002,
+    2026-10-07) — "add substraction"; clarified by Kartik Chandra Biswas in build
+    session 2026-10-07 (second button, side by side, labelled Add and Subtract)
   rationale: >-
-    The calculator is for a child. The brief limits the screen to exactly these
-    four controls so there is nothing else to distract or confuse. FB-0001 asks
-    that those four controls look like something a child would like, on an
-    attractive background, lined up in one column.
+    The calculator is for a child. The screen holds only the controls the child
+    needs, so there is nothing else to distract or confuse. FB-0001 asks that
+    those controls look like something a child would like, on an attractive
+    background, lined up in one column. FB-0002 adds subtraction as a second
+    button beside the first.
   acceptance:
     - given: The calculator page is opened in a browser
       when: The page has loaded
-      then: Exactly two text boxes, one button and one answer label are visible on a single page
+      then: >-
+        Exactly two text boxes, two buttons and one answer label are visible on a
+        single page
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: One button shows the text "Add" and the other shows the text "Subtract"
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: >-
-        The first text box, second text box, button and answer label are stacked
-        top to bottom in that order, and the horizontal centre of each is the
-        horizontal centre of the page
+        The first text box, the second text box, the row of buttons and the answer
+        label are stacked top to bottom in that order, and the horizontal centre of
+        each is the horizontal centre of the page
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: >-
+        The Add and Subtract buttons sit side by side on one row, Add on the left,
+        with their tops level
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: The page background is not plain white
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: >-
-        The button, each text box and the answer label each have a background
+        Each button, each text box and the answer label each have a background
         colour, a border and a font size that differ from the browser's default
         for that control
   ambiguities: []
@@ -49,30 +59,51 @@
         Verified 2026-10-01 by tests/calculator.spec.js and e2e/calculator.spec.js.
         Superseded by CHG-0001 (absorbed), which adds a centred column, a
         non-white background and styled controls.
+    - version: 2
+      agreed: 2026-10-01
+      superseded_by: 3
+      summary: >-
+        v2 required exactly two text boxes, one button and one answer label in a
+        centred column, on a non-white background, with styled controls.
+        Verified by tests/calculator.spec.js and e2e/calculator.spec.js.
+        Superseded by CHG-0002 (absorbed), which adds a Subtract button beside
+        the Add button.
 
 - id: REQ-DEMO-002
-  title: Pressing the button shows the sum of the two Numbers in the answer label
+  title: Pressing the Add button shows the sum of the two Numbers in the answer label
   module: DEMO
   priority: must
-  status: verified
-  verified_by:
-    - e2e/calculator.spec.js
-    - tests/calculator.spec.js
-  version: 1
-  source: BRIEF.md 2026-10-01 — "only can add two numbers ... giving right input just show them a simple addition"
-  rationale: The one and only purpose of the calculator is adding two Numbers.
+  status: agreed
+  version: 2
+  source: >-
+    BRIEF.md 2026-10-01 — "only can add two numbers ... giving right input just
+    show them a simple addition"; CHG-0002 (FB-0002, 2026-10-07) — "add
+    substraction"; clarified by Kartik Chandra Biswas in build session 2026-10-07
+    (second button labelled Subtract)
+  rationale: >-
+    Adding two Numbers is one of the Calculator's two purposes. CHG-0002 adds a
+    Subtract button, so this requirement now names the Add button.
   acceptance:
     - given: The first text box holds 3 and the second holds 4
-      when: The button is pressed
+      when: The Add button is pressed
       then: The answer label shows 7
     - given: The first text box holds 0 and the second holds 5
-      when: The button is pressed
+      when: The Add button is pressed
       then: The answer label shows 5
   ambiguities: []
   depends_on:
     - REQ-DEMO-001
     - REQ-DEMO-003
   belts: [A, B]
+  history:
+    - version: 1
+      agreed: 2026-10-01
+      superseded_by: 2
+      summary: >-
+        v1 said pressing "the button" (the only one) shows the sum, and that
+        adding was the one and only purpose. Verified by tests/calculator.spec.js
+        and e2e/calculator.spec.js. Superseded by CHG-0002 (absorbed), which adds
+        a Subtract button.
 
 - id: REQ-DEMO-003
   title: Each text box accepts only whole Numbers of zero or more, so invalid input cannot be entered
@@ -104,4 +135,33 @@
   ambiguities: []
   depends_on:
     - REQ-DEMO-001
+  belts: [A, B]
+
+- id: REQ-DEMO-004
+  title: Pressing the Subtract button shows the first Number minus the second in the answer label
+  module: DEMO
+  priority: must
+  status: agreed
+  version: 1
+  source: >-
+    CHG-0002 (FB-0002, 2026-10-07) — "add substraction"; clarified by Kartik
+    Chandra Biswas in build session 2026-10-07 (a second button; when the second
+    Number is larger, show the negative Answer)
+  rationale: >-
+    The client asked for subtraction. The text boxes still accept only Numbers,
+    but the Answer may be negative when the second Number is larger.
+  acceptance:
+    - given: The first text box holds 7 and the second holds 3
+      when: The Subtract button is pressed
+      then: The answer label shows 4
+    - given: The first text box holds 5 and the second holds 5
+      when: The Subtract button is pressed
+      then: The answer label shows 0
+    - given: The first text box holds 3 and the second holds 5
+      when: The Subtract button is pressed
+      then: The answer label shows -2
+  ambiguities: []
+  depends_on:
+    - REQ-DEMO-001
+    - REQ-DEMO-003
   belts: [A, B]

@@ -33,3 +33,9 @@
   branch: feat/calculator
   why: "A child types two whole Numbers, presses the button and sees the Answer; minus, decimal point and letters cannot be typed"
   covers: [REQ-DEMO-001, REQ-DEMO-003, REQ-DEMO-002]
+
+- id: 2
+  name: Subtraction
+  branch: feat/subtraction
+  why: "A child types two Numbers, presses Subtract and sees the first minus the second, including a negative Answer"
+  covers: [REQ-DEMO-004]

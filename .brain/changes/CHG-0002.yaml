@@ -1,0 +1,33 @@
+id: CHG-0002
+raised: 2026-10-07
+stream: scope_change
+source: "FB-0002, message in build session 2026-10-07, Kartik Chandra Biswas"
+raw: "add substraction"
+asks:
+  - "A1 The Calculator can subtract one Number from the other: contradicts (BRIEF.md 2026-10-01 'calculator only can add two numbers'; REQ-DEMO-002@v1 rationale 'The one and only purpose of the calculator is adding two Numbers'; glossary Answer = 'the sum of the two Numbers')"
+affects: [REQ-DEMO-001, REQ-DEMO-002, REQ-DEMO-004]
+analysis:
+  dependants: [REQ-DEMO-003]   # depends_on REQ-DEMO-001; its text is unchanged unless the non-negative rule moves
+  tests_invalidated: 2         # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-001@v2 and REQ-DEMO-002@v1, stale once either moves
+  constraint: >-
+    REQ-DEMO-001@v2 c1 requires exactly two text boxes, one button and one
+    answer label, and c2 fixes their order. Choosing between add and subtract
+    needs a second button or another control, so REQ-DEMO-001 must be
+    superseded. REQ-DEMO-002@v1 says pressing the button shows the sum; its
+    title, rationale and criteria must be superseded or a new requirement
+    added. Glossary terms Answer ("the sum") and Calculator ("one button")
+    would need redefining through /checkpoint.
+  open_before_build: >-
+    How the child chooses the operation (a second button, a selector, or
+    something else) is not stated. The brief says "no negative number will be
+    acceptable" and a Number is never negative, but 3 - 5 = -2: what the
+    Calculator does when the second Number is larger (refuse, show nothing,
+    show a negative Answer, or prevent it) must be answered by the client.
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-07; second button labelled Subtract beside Add, negative Answer shown"
+outcome:
+  - REQ-DEMO-001: v3
+  - REQ-DEMO-002: v2
+  - REQ-DEMO-003: unchanged
+  - REQ-DEMO-004: new (v1)
