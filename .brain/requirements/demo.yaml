@@ -2,7 +2,10 @@
   title: A single page shows two text boxes, four operation buttons, a close button and one answer label
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 4
   source: >-
     BRIEF.md 2026-10-01 — "single page application ... just two text box and a
@@ -198,7 +201,10 @@
   title: Pressing the close button clears both text boxes and the answer label
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 1
   source: >-
     CHG-0003 (FB-0003, 2026-10-07) — "ADD A CLOSE (x) ON TOP RIGHT corner";
@@ -225,7 +231,10 @@
   title: Pressing the Multiply button shows the first Number times the second in the answer label
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 1
   source: >-
     CHG-0004 (FB-0003, 2026-10-07) — "add multiply"; clarified by Kartik Chandra
@@ -248,7 +257,10 @@
   title: Pressing the Divide button shows the first Number divided by the second, as a whole number and remainder
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 1
   source: >-
     CHG-0005 (FB-0003, 2026-10-07) — "add ... Division"; clarified by Kartik
