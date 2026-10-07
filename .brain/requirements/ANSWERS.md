@@ -27,3 +27,24 @@ Answered 2026-10-07 by Kartik Chandra Biswas, build session, choosing from liste
   > Add and Subtract
 
 Also decided: CHG-0002 "Absorbed, no charge".
+
+## CHG-0003, CHG-0004, CHG-0005: close (x), multiply and divide (FB-0003)
+
+Answered 2026-10-07 by Kartik Chandra Biswas, build session, choosing from listed options.
+
+- What should pressing the close (x) do? (clear everything / hide the Calculator / close the tab)
+  > Clear everything
+- Where does the close (x) sit? (card's top right / window's top right)
+  > Card's top right
+- What text do the new operation buttons show? (Multiply and Divide / × and ÷)
+  > Multiply and Divide
+- How do the four operation buttons sit? (one row of four / two rows of two)
+  > One row of four
+- What shows when dividing gives a part number, e.g. 7 ÷ 2? (3 r 1 / 3.5 / 3)
+  > 3 r 1
+- What shows when dividing by 0, e.g. 5 ÷ 0? (show nothing / friendly message)
+  > Show nothing
+- When division comes out exactly, e.g. 6 ÷ 2, what shows? (3 / 3 r 0)
+  > 3
+
+Also decided: CHG-0003, CHG-0004 and CHG-0005 "Absorbed, no charge".

@@ -1,12 +1,9 @@
 - id: REQ-DEMO-001
-  title: A single page shows two text boxes, an Add button, a Subtract button and one answer label
+  title: A single page shows two text boxes, four operation buttons, a close button and one answer label
   module: DEMO
   priority: must
-  status: verified
-  verified_by:
-    - e2e/calculator.spec.js
-    - tests/calculator.spec.js
-  version: 3
+  status: agreed
+  version: 4
   source: >-
     BRIEF.md 2026-10-01 — "single page application ... just two text box and a
     button, answer will be shown in a label"; CHG-0001 (FB-0001, 2026-10-01) —
@@ -14,33 +11,45 @@
     nice all aligned in same point"; alignment clarified as a centred column by
     Kartik Chandra Biswas in build session 2026-10-01; CHG-0002 (FB-0002,
     2026-10-07) — "add substraction"; clarified by Kartik Chandra Biswas in build
-    session 2026-10-07 (second button, side by side, labelled Add and Subtract)
+    session 2026-10-07 (second button, side by side, labelled Add and Subtract);
+    CHG-0003, CHG-0004, CHG-0005 (FB-0003, 2026-10-07) — "ADD A CLOSE (x) ON TOP
+    RIGHT corner. And al;so add multiply and Division"; clarified by Kartik
+    Chandra Biswas in build session 2026-10-07 (close in the card's top right;
+    Multiply and Divide labels; one row of four)
   rationale: >-
     The calculator is for a child. The screen holds only the controls the child
     needs, so there is nothing else to distract or confuse. FB-0001 asks that
     those controls look like something a child would like, on an attractive
-    background, lined up in one column. FB-0002 adds subtraction as a second
-    button beside the first.
+    background, lined up in one column. FB-0002 adds subtraction, and FB-0003
+    adds multiplication, division and a close (x) that clears the Calculator.
   acceptance:
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: >-
-        Exactly two text boxes, two buttons and one answer label are visible on a
-        single page
-    - given: The calculator page is opened in a browser
-      when: The page has loaded
-      then: One button shows the text "Add" and the other shows the text "Subtract"
+        Exactly two text boxes, five buttons (four operation buttons and one close
+        button) and one answer label are visible on a single page
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: >-
-        The first text box, the second text box, the row of buttons and the answer
-        label are stacked top to bottom in that order, and the horizontal centre of
-        each is the horizontal centre of the page
+        The four operation buttons show the text "Add", "Subtract", "Multiply" and
+        "Divide", and the close button shows an x
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: >-
-        The Add and Subtract buttons sit side by side on one row, Add on the left,
-        with their tops level
+        The first text box, the second text box, the row of operation buttons and
+        the answer label are stacked top to bottom in that order, and the
+        horizontal centre of each is the horizontal centre of the page
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: >-
+        Add, Subtract, Multiply and Divide sit side by side on one row, in that
+        order from left to right, with their tops level
+    - given: The calculator page is opened in a browser
+      when: The page has loaded
+      then: >-
+        The close button sits inside the white card that holds the controls, in its
+        top right corner: its right edge is nearer the card's right edge than the
+        first text box's right edge is, and its top is above the first text box
     - given: The calculator page is opened in a browser
       when: The page has loaded
       then: The page background is not plain white
@@ -71,6 +80,16 @@
         Verified by tests/calculator.spec.js and e2e/calculator.spec.js.
         Superseded by CHG-0002 (absorbed), which adds a Subtract button beside
         the Add button.
+    - version: 3
+      agreed: 2026-10-07
+      superseded_by: 4
+      summary: >-
+        v3 required exactly two text boxes, two buttons (Add and Subtract, side by
+        side) and one answer label in a centred column, on a non-white background,
+        with styled controls. Verified by tests/calculator.spec.js and
+        e2e/calculator.spec.js. Superseded by CHG-0003, CHG-0004 and CHG-0005
+        (all absorbed), which add Multiply and Divide to the row and a close (x)
+        in the card's top right corner.
 
 - id: REQ-DEMO-002
   title: Pressing the Add button shows the sum of the two Numbers in the answer label
@@ -169,6 +188,86 @@
     - given: The first text box holds 3 and the second holds 5
       when: The Subtract button is pressed
       then: The answer label shows -2
+  ambiguities: []
+  depends_on:
+    - REQ-DEMO-001
+    - REQ-DEMO-003
+  belts: [A, B]
+
+- id: REQ-DEMO-005
+  title: Pressing the close button clears both text boxes and the answer label
+  module: DEMO
+  priority: must
+  status: agreed
+  version: 1
+  source: >-
+    CHG-0003 (FB-0003, 2026-10-07) — "ADD A CLOSE (x) ON TOP RIGHT corner";
+    clarified by Kartik Chandra Biswas in build session 2026-10-07 (clear
+    everything; the Calculator stays on screen)
+  rationale: >-
+    There is no other page to close to. The close (x) lets a child start again:
+    it empties the Calculator rather than hiding it.
+  acceptance:
+    - given: The first text box holds 3, the second holds 4, and Add has been pressed so the answer label shows 7
+      when: The close button is pressed
+      then: Both text boxes are empty and the answer label is empty
+    - given: The close button has been pressed
+      when: The page is looked at
+      then: >-
+        The two text boxes, the four operation buttons, the close button and the
+        answer label are still visible
+  ambiguities: []
+  depends_on:
+    - REQ-DEMO-001
+  belts: [A, B]
+
+- id: REQ-DEMO-006
+  title: Pressing the Multiply button shows the first Number times the second in the answer label
+  module: DEMO
+  priority: must
+  status: agreed
+  version: 1
+  source: >-
+    CHG-0004 (FB-0003, 2026-10-07) — "add multiply"; clarified by Kartik Chandra
+    Biswas in build session 2026-10-07 (button labelled Multiply, in the row)
+  rationale: The client asked for multiplication of the two Numbers.
+  acceptance:
+    - given: The first text box holds 3 and the second holds 4
+      when: The Multiply button is pressed
+      then: The answer label shows 12
+    - given: The first text box holds 0 and the second holds 5
+      when: The Multiply button is pressed
+      then: The answer label shows 0
+  ambiguities: []
+  depends_on:
+    - REQ-DEMO-001
+    - REQ-DEMO-003
+  belts: [A, B]
+
+- id: REQ-DEMO-007
+  title: Pressing the Divide button shows the first Number divided by the second, as a whole number and remainder
+  module: DEMO
+  priority: must
+  status: agreed
+  version: 1
+  source: >-
+    CHG-0005 (FB-0003, 2026-10-07) — "add ... Division"; clarified by Kartik
+    Chandra Biswas in build session 2026-10-07 (7 ÷ 2 shows "3 r 1"; 6 ÷ 2 shows
+    "3"; dividing by 0 shows nothing)
+  rationale: >-
+    The Numbers are whole, and a child learns division as a whole number and a
+    remainder. The remainder is shown only when it is not 0. Dividing by 0 has no
+    Answer, so nothing is shown.
+  acceptance:
+    - given: The first text box holds 6 and the second holds 2
+      when: The Divide button is pressed
+      then: The answer label shows 3
+    - given: The first text box holds 7 and the second holds 2
+      when: The Divide button is pressed
+      then: The answer label shows 3 r 1
+    - given: The first text box holds 5 and the second holds 0
+      when: The Divide button is pressed
+      then: The answer label is empty
   ambiguities: []
   depends_on:
     - REQ-DEMO-001
