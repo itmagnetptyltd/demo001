@@ -39,3 +39,15 @@
   branch: feat/subtraction
   why: "A child types two Numbers, presses Subtract and sees the first minus the second, including a negative Answer"
   covers: [REQ-DEMO-004]
+
+- id: 3
+  name: Multiply and Divide
+  branch: feat/multiply-divide
+  why: "A child presses Multiply or Divide and sees 3 x 4 = 12, 7 divided by 2 as 3 r 1, and nothing when dividing by 0"
+  covers: [REQ-DEMO-006, REQ-DEMO-007]
+
+- id: 4
+  name: Close
+  branch: feat/close
+  why: "A child presses the x in the card's top right corner and both text boxes and the Answer are cleared"
+  covers: [REQ-DEMO-005]

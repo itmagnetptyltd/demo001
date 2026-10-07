@@ -53,14 +53,23 @@ they diverge, that divergence is itself worth writing down.
 box. Never negative, never a decimal.
 - **Also called:** the client says "number" and "whole number". Both mean Number.
 
-**Answer** — the result shown in the answer label: the sum of the two Numbers
-after the Add button is pressed, or the first Number minus the second after the
-Subtract button is pressed. Unlike a Number, an Answer can be negative
-(CHG-0002).
-- **Also called:** the client says "answer", "addition" and "substraction".
+**Answer** — the result shown in the answer label after an operation button is
+pressed: the sum (Add), the first Number minus the second (Subtract), the
+product (Multiply), or the first Number divided by the second as a whole number
+followed by " r " and the remainder when the remainder is not 0, e.g. "3 r 1"
+(Divide). Unlike a Number, an Answer can be negative (CHG-0002). Dividing by 0
+has no Answer (CHG-0005).
+- **Also called:** the client says "answer", "addition", "substraction",
+  "multiply" and "Division".
 
-**Calculator** — the single page holding two text boxes, an Add button, a
-Subtract button and one answer label (CHG-0002). There is no other page.
+**Calculator** — the single page holding two text boxes, four operation buttons
+(Add, Subtract, Multiply, Divide), a close button and one answer label
+(CHG-0002, CHG-0003, CHG-0004, CHG-0005). There is no other page.
+
+**Close button** — the x in the top right corner of the Calculator's card. It
+clears both text boxes and the answer label; it does not close or hide anything
+(CHG-0003).
+- **Also called:** the client says "CLOSE (x)".
 
 ---
 

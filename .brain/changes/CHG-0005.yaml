@@ -1,0 +1,31 @@
+id: CHG-0005
+raised: 2026-10-07
+stream: scope_change
+source: "FB-0003, message in build session 2026-10-07, Kartik Chandra Biswas"
+raw: "ADD A CLOSE (x) ON TOP RIGHT corner. And al;so add multiply and Division"
+asks:
+  - "A3 The Calculator can divide the first Number by the second: contradicts (REQ-DEMO-001@v3 c1 'two buttons' and c2 buttons read 'Add' and 'Subtract'; no criterion in REQ-DEMO-002@v2 or REQ-DEMO-004@v1 asks for a quotient; glossary Answer is a sum or a difference only)"
+affects: [REQ-DEMO-001, REQ-DEMO-007]
+analysis:
+  dependants: [REQ-DEMO-002, REQ-DEMO-003, REQ-DEMO-004]   # all depend_on REQ-DEMO-001
+  tests_invalidated: 2       # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-001@v3 (count, labels, row layout)
+  constraint: >-
+    Same as CHG-0004 for the button: REQ-DEMO-001@v3 c1, c2 and c4 allow only Add
+    and Subtract. A Divide control needs REQ-DEMO-001 superseded, a new
+    requirement for the quotient, and the glossary Answer and Calculator
+    redefined. REQ-DEMO-003@v1 c4 and the glossary Number ('zero or more') both
+    allow 0 as the second Number.
+  open_before_build: >-
+    Division by zero: what the answer label shows. Results that are not whole
+    (7 divided by 2): show 3.5, 3, or 3 remainder 1, and if rounded, which way;
+    the brief says "whole number not decimal" about input only. What the button
+    says and where it sits.
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-07."
+outcome:
+  - REQ-DEMO-001: v4
+  - REQ-DEMO-007: new (v1)
+  - REQ-DEMO-002: unchanged
+  - REQ-DEMO-003: unchanged
+  - REQ-DEMO-004: unchanged

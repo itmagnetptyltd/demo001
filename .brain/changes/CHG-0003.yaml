@@ -1,0 +1,32 @@
+id: CHG-0003
+raised: 2026-10-07
+stream: scope_change
+source: "FB-0003, message in build session 2026-10-07, Kartik Chandra Biswas"
+raw: "ADD A CLOSE (x) ON TOP RIGHT corner. And al;so add multiply and Division"
+asks:
+  - "A1 A close control, shown as x, in the top right corner: contradicts (REQ-DEMO-001@v3 c1 'Exactly two text boxes, two buttons and one answer label'; c3 lists everything stacked on the page; glossary Calculator lists what the page holds, 'There is no other page')"
+affects: [REQ-DEMO-001, REQ-DEMO-005]
+analysis:
+  dependants: [REQ-DEMO-002, REQ-DEMO-003, REQ-DEMO-004]   # all depend_on REQ-DEMO-001
+  tests_invalidated: 2       # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-001@v3 (count, order, centring, style checks)
+  constraint: >-
+    A clickable x is a third button, which breaks REQ-DEMO-001@v3 c1. c3 and the
+    glossary Calculator entry list everything on the page and leave no top-right
+    element. REQ-DEMO-001 must be superseded and the glossary Calculator
+    redefined. c6 would need a decision on whether its styling rule applies to
+    the x.
+  open_before_build: >-
+    What close does is not stated, and the glossary says there is no other page
+    to close to: clear the text boxes and the Answer, hide the Calculator, or
+    close the browser tab (browsers usually refuse to let a page close a tab it
+    did not open by script). Top right of the card or of the window. Size and
+    look, and whether a child should be asked to confirm.
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-07."
+outcome:
+  - REQ-DEMO-001: v4
+  - REQ-DEMO-005: new (v1)
+  - REQ-DEMO-002: unchanged
+  - REQ-DEMO-003: unchanged
+  - REQ-DEMO-004: unchanged
