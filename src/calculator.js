@@ -7,7 +7,7 @@ const NOT_A_DIGIT = /[^0-9]/g;
  * @returns {string} the same text with only the digits 0-9 kept
  */
 export function toNumberText(text) {
-  return text.replace(NOT_A_DIGIT, '');
+  return text.replace(NOT_A_DIGIT, "");
 }
 
 /**
@@ -18,4 +18,14 @@ export function toNumberText(text) {
  */
 export function addNumbers(first, second) {
   return Number.parseInt(first, 10) + Number.parseInt(second, 10);
+}
+
+/**
+ * Subtracts the second Number from the first. The Answer can be negative.
+ * @param {string} first - digits only, as returned by toNumberText
+ * @param {string} second - digits only, as returned by toNumberText
+ * @returns {number} the Answer
+ */
+export function subtractNumbers(first, second) {
+  return Number.parseInt(first, 10) - Number.parseInt(second, 10);
 }
