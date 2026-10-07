@@ -4,7 +4,7 @@
 - **From:** Kartik Chandra Biswas (exact role not stated)
 - **Channel:** Message in the build session (`/feedback-capture`), after the running app was shown at http://127.0.0.1:4173/
 - **Anchors:** REQ-DEMO-001@v1
-- **Triage:** proposed — variation
+- **Triage:** variation — absorbed (CHG-0001)
 - **Sentiment:** negative (about appearance only; nothing said about behaviour)
 
 ## What they said
@@ -40,8 +40,11 @@ alignment rule.
 
 ## Resolution
 
-_Open._ `/find-variation` 2026-10-01: all five asks not-covered by any agreed
+_Closed._ `/find-variation` 2026-10-01: all five asks not-covered by any agreed
 criterion, so classified as **variation**. Drafted as CHG-0001.
 
 2026-10-01: CHG-0001 decided **absorbed** (no charge), alignment as one centred
 column. REQ-DEMO-001 moved to v2 (draft) with design criteria. Build pending.
+
+2026-10-07: Built and verified. REQ-DEMO-001 v2 is `verified` by
+`tests/calculator.spec.js` and `e2e/calculator.spec.js`; belt B passed 14/14.
