@@ -133,19 +133,29 @@ test("0 times 5 gives the Answer 0", () => {
   assert.equal(multiplyNumbers("0", "5"), 0);
 });
 
-// @covers REQ-DEMO-007@v1
+// @covers REQ-DEMO-007@v2
 test("6 divided by 2 gives the Answer 3", () => {
   assert.equal(divideNumbers("6", "2"), "3");
 });
 
-// @covers REQ-DEMO-007@v1
-test("7 divided by 2 gives the Answer 3 r 1", () => {
-  assert.equal(divideNumbers("7", "2"), "3 r 1");
+// @covers REQ-DEMO-007@v2
+test("7 divided by 2 gives the Answer 3.5", () => {
+  assert.equal(divideNumbers("7", "2"), "3.5");
 });
 
-// @covers REQ-DEMO-007@v1
-test("dividing by 0 gives no Answer", () => {
-  assert.equal(divideNumbers("5", "0"), "");
+// @covers REQ-DEMO-007@v2
+test("3434 divided by 5000 gives the Answer 0.69", () => {
+  assert.equal(divideNumbers("3434", "5000"), "0.69");
+});
+
+// @covers REQ-DEMO-007@v2
+test("1 divided by 3 gives the Answer 0.33", () => {
+  assert.equal(divideNumbers("1", "3"), "0.33");
+});
+
+// @covers REQ-DEMO-007@v2
+test("dividing by 0 gives the message", () => {
+  assert.equal(divideNumbers("5", "0"), "Oops! You can't divide by zero");
 });
 
 const APP_URL = new URL("../src/app.js", import.meta.url);
@@ -165,19 +175,53 @@ function aStandInElement() {
 
 /** Loads a fresh copy of app.js against a stand-in document. */
 async function aCalculatorPage(name) {
-  const ids = ["first-number", "second-number", "add", "subtract", "multiply", "divide", "close", "answer"];
+  const ids = [
+    "first-number",
+    "second-number",
+    "add",
+    "subtract",
+    "multiply",
+    "divide",
+    "close",
+    "answer",
+  ];
   const elements = Object.fromEntries(ids.map((id) => [id, aStandInElement()]));
   globalThis.document = { getElementById: (id) => elements[id] ?? null };
+  globalThis.window = aBrowserThatRefusesToClose();
   await import(`${APP_URL.href}?page=${name}`);
-  return elements;
+  return { ...elements, window: globalThis.window };
 }
 
-// @covers REQ-DEMO-005@v1
-test("pressing close after 3 + 4 = 7 empties both text boxes and the answer label", async (t) => {
-  t.after(() => {
-    delete globalThis.document;
-  });
-  const page = await aCalculatorPage("close-after-add");
+/** A stand-in window: records each request to close the tab, and refuses it. */
+function aBrowserThatRefusesToClose() {
+  const browser = {
+    closeRequests: 0,
+    close: () => {
+      browser.closeRequests += 1;
+    },
+  };
+  return browser;
+}
+
+function forgetTheStandIns() {
+  delete globalThis.document;
+  delete globalThis.window;
+}
+
+// @covers REQ-DEMO-005@v2
+test("pressing close asks the browser to close the tab", async (t) => {
+  t.after(forgetTheStandIns);
+  const page = await aCalculatorPage("close-asks");
+
+  page.close.fire("click");
+
+  assert.equal(page.window.closeRequests, 1);
+});
+
+// @covers REQ-DEMO-005@v2
+test("pressing close when the browser refuses leaves 3, 4 and 7 as they were", async (t) => {
+  t.after(forgetTheStandIns);
+  const page = await aCalculatorPage("close-refused");
   page["first-number"].value = "3";
   page["second-number"].value = "4";
   page.add.fire("click");
@@ -186,7 +230,11 @@ test("pressing close after 3 + 4 = 7 empties both text boxes and the answer labe
   page.close.fire("click");
 
   assert.deepEqual(
-    [page["first-number"].value, page["second-number"].value, page.answer.textContent],
-    ["", "", ""],
+    [
+      page["first-number"].value,
+      page["second-number"].value,
+      page.answer.textContent,
+    ],
+    ["3", "4", "7"],
   );
 });

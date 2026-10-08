@@ -203,7 +203,7 @@ test("0 and 5 then Multiply shows 0", async ({ page }) => {
   await expect(page.getByRole("status")).toHaveText("0");
 });
 
-// @covers REQ-DEMO-007@v1
+// @covers REQ-DEMO-007@v2
 test("6 and 2 then Divide shows 3", async ({ page }) => {
   await typeNumbers(page, "6", "2");
 
@@ -212,69 +212,104 @@ test("6 and 2 then Divide shows 3", async ({ page }) => {
   await expect(page.getByRole("status")).toHaveText("3");
 });
 
-// @covers REQ-DEMO-007@v1
-test("7 and 2 then Divide shows 3 r 1", async ({ page }) => {
+// @covers REQ-DEMO-007@v2
+test("7 and 2 then Divide shows 3.5", async ({ page }) => {
   await typeNumbers(page, "7", "2");
 
   await page.getByRole("button", { name: "Divide", exact: true }).click();
 
-  await expect(page.getByRole("status")).toHaveText("3 r 1");
+  await expect(page.getByRole("status")).toHaveText("3.5");
 });
 
-// @covers REQ-DEMO-007@v1
-test("5 and 0 then Divide leaves the answer label empty", async ({ page }) => {
-  await typeNumbers(page, "5", "0");
-  await page.getByRole("button", { name: "Add", exact: true }).click();
-  await expect(page.getByRole("status")).toHaveText("5");
+// @covers REQ-DEMO-007@v2
+test("3434 and 5000 then Divide shows 0.69", async ({ page }) => {
+  await typeNumbers(page, "3434", "5000");
 
   await page.getByRole("button", { name: "Divide", exact: true }).click();
 
-  await expect(page.getByRole("status")).toHaveText("");
+  await expect(page.getByRole("status")).toHaveText("0.69");
 });
 
-// @covers REQ-DEMO-005@v1
-test("3 and 4, Add, then close empties both text boxes and the answer label", async ({
+// @covers REQ-DEMO-007@v2
+test("1 and 3 then Divide shows 0.33", async ({ page }) => {
+  await typeNumbers(page, "1", "3");
+
+  await page.getByRole("button", { name: "Divide", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText("0.33");
+});
+
+// @covers REQ-DEMO-007@v2
+test("5 and 0 then Divide shows Oops! You can't divide by zero", async ({
   page,
 }) => {
+  await typeNumbers(page, "5", "0");
+
+  await page.getByRole("button", { name: "Divide", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText(
+    "Oops! You can't divide by zero",
+  );
+});
+
+// @covers REQ-DEMO-007@v2
+test("5 and 0 then Divide leaves the text boxes holding 5 and 0", async ({
+  page,
+}) => {
+  await typeNumbers(page, "5", "0");
+
+  await page.getByRole("button", { name: "Divide", exact: true }).click();
+
+  await expect(page.getByRole("textbox", { name: "First Number" })).toHaveValue(
+    "5",
+  );
+  await expect(
+    page.getByRole("textbox", { name: "Second Number" }),
+  ).toHaveValue("0");
+});
+
+// @covers REQ-DEMO-005@v2
+test("pressing close closes a tab the page is allowed to close", async ({
+  page,
+  context,
+}) => {
+  // Browsers let a page close its tab only when a script opened that tab.
+  const [calculatorTab] = await Promise.all([
+    context.waitForEvent("page"),
+    page.evaluate(() => {
+      window.open("/", "_blank");
+    }),
+  ]);
+  await calculatorTab.waitForLoadState();
+  const closed = calculatorTab.waitForEvent("close", { timeout: 5000 });
+
+  await calculatorTab.getByRole("button", { name: "Close" }).click();
+
+  await closed;
+  expect(calculatorTab.isClosed()).toBe(true);
+});
+
+// @covers REQ-DEMO-005@v2
+test("pressing close in a tab the browser keeps open changes nothing", async ({
+  page,
+}) => {
+  // This tab was not opened by a script and has more than one history entry,
+  // so the browser will not let the page close it.
+  await page.goto("/?again");
   await typeNumbers(page, "3", "4");
   await page.getByRole("button", { name: "Add", exact: true }).click();
   await expect(page.getByRole("status")).toHaveText("7");
 
   await page.getByRole("button", { name: "Close" }).click();
 
+  expect(page.isClosed()).toBe(false);
   await expect(page.getByRole("textbox", { name: "First Number" })).toHaveValue(
-    "",
+    "3",
   );
   await expect(
     page.getByRole("textbox", { name: "Second Number" }),
-  ).toHaveValue("");
-  await expect(page.getByRole("status")).toHaveText("");
-});
-
-// @covers REQ-DEMO-005@v1
-test("after close, every control is still visible", async ({ page }) => {
-  await page.getByRole("button", { name: "Close" }).click();
-
-  await expect(
-    page.getByRole("textbox", { name: "First Number" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("textbox", { name: "Second Number" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Add", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Subtract", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Multiply", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Divide", exact: true }),
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
-  await expect(page.getByRole("status")).toBeVisible();
+  ).toHaveValue("4");
+  await expect(page.getByRole("status")).toHaveText("7");
 });
 
 const CONTROLS = [

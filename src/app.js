@@ -39,8 +39,5 @@ subtractButton.addEventListener("click", () => showAnswer(subtractNumbers));
 multiplyButton.addEventListener("click", () => showAnswer(multiplyNumbers));
 divideButton.addEventListener("click", () => showAnswer(divideNumbers));
 
-closeButton.addEventListener("click", () => {
-  firstBox.value = "";
-  secondBox.value = "";
-  answerLabel.textContent = "";
-});
+// Browsers close the tab only if the page is allowed to; otherwise nothing changes.
+closeButton.addEventListener("click", () => window.close());

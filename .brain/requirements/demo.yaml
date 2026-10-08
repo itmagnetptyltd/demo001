@@ -201,7 +201,10 @@
   title: Pressing the close button asks the browser to close the tab
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 2
   source: >-
     CHG-0003 (FB-0003, 2026-10-07) — "ADD A CLOSE (x) ON TOP RIGHT corner";
@@ -265,7 +268,10 @@
   title: Pressing the Divide button shows the first Number divided by the second, rounded to 2 decimal places
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 2
   source: >-
     CHG-0005 (FB-0003, 2026-10-07) — "add ... Division"; CHG-0007 and CHG-0008
