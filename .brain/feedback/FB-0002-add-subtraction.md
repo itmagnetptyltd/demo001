@@ -23,7 +23,7 @@ subtracting, or what happens when the second Number is larger than the first.
 
 ## Resolution
 
-_Open._ `/find-variation` 2026-10-07: the one ask **contradicts** the agreed
+_Closed._ `/find-variation` 2026-10-07: the one ask **contradicts** the agreed
 brief ("only can add two numbers") and REQ-DEMO-002@v1, so classified as
 **variation**. Drafted as CHG-0002.
 
@@ -31,3 +31,7 @@ brief ("only can add two numbers") and REQ-DEMO-002@v1, so classified as
 Subtract, beside Add; a negative Answer is shown when the second Number is
 larger. REQ-DEMO-001 moved to v3, REQ-DEMO-002 to v2, REQ-DEMO-004 added, all
 agreed. Build pending.
+
+2026-10-08: Built and verified. REQ-DEMO-001 v3, REQ-DEMO-002 v2 and
+REQ-DEMO-004 v1 `verified` by `tests/calculator.spec.js` and
+`e2e/calculator.spec.js`; merged in PR #4 (`feat/subtraction`).

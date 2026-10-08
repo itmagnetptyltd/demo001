@@ -44,10 +44,15 @@ The delivered behaviour matches those answers and the agreed criteria
 
 ## Resolution
 
-_Open._ `/find-variation` 2026-10-07: close-closes and real-result Divide **contradict** REQ-DEMO-005@v1 and REQ-DEMO-007@v1 and the client's own answers of the same day; the ÷ 0 message contradicts REQ-DEMO-007@v1 c3; clearing on ÷ 0 is half already agreed (answer label) and half not covered (text boxes). Drafted as CHG-0006 (close), CHG-0007 (real result) and CHG-0008 (÷ 0 message and clearing).
+_Closed._ `/find-variation` 2026-10-07: close-closes and real-result Divide **contradict** REQ-DEMO-005@v1 and REQ-DEMO-007@v1 and the client's own answers of the same day; the ÷ 0 message contradicts REQ-DEMO-007@v1 c3; clearing on ÷ 0 is half already agreed (answer label) and half not covered (text boxes). Drafted as CHG-0006 (close), CHG-0007 (real result) and CHG-0008 (÷ 0 message and clearing).
 
 2026-10-07: CHG-0006, CHG-0007 and CHG-0008 decided **absorbed** (no charge).
 Close tries to close the tab (chosen knowing browsers usually refuse). Divide
 shows a decimal rounded to 2 places, no trailing zeros. Dividing by 0 shows
 "Oops! You can't divide by zero" in the answer label and clears nothing else.
 REQ-DEMO-005 moved to v2 and REQ-DEMO-007 to v2, both agreed. Build pending.
+
+2026-10-08: Built and verified. REQ-DEMO-005 v2 and REQ-DEMO-007 v2 `verified`
+by `tests/calculator.spec.js` and `e2e/calculator.spec.js`; merged in PR #8
+(`feat/close-tab-decimal-divide`). See `constraints/browser-tab-close.md` for
+why the close button usually does nothing in a tab the user opened.

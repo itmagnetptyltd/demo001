@@ -35,10 +35,15 @@ difference only. Hence **variation** is proposed for all three. A human decides.
 
 ## Resolution
 
-_Open._ `/find-variation` 2026-10-07: all three asks **contradict** REQ-DEMO-001@v3 c1-c2 (exactly two buttons, Add and Subtract), so classified as **variation**. Drafted as CHG-0003 (close x), CHG-0004 (multiply) and CHG-0005 (divide).
+_Closed._ `/find-variation` 2026-10-07: all three asks **contradict** REQ-DEMO-001@v3 c1-c2 (exactly two buttons, Add and Subtract), so classified as **variation**. Drafted as CHG-0003 (close x), CHG-0004 (multiply) and CHG-0005 (divide).
 
 2026-10-07: CHG-0003, CHG-0004 and CHG-0005 decided **absorbed** (no charge).
 Close clears both text boxes and the answer label, in the card's top right.
 Multiply and Divide join Add and Subtract on one row; division shows a whole
 number and remainder ("3 r 1"), and nothing when dividing by 0. REQ-DEMO-001
 moved to v4; REQ-DEMO-005, 006 and 007 added; all agreed. Build pending.
+
+2026-10-08: Built and verified on `feat/multiply-divide-close` (REQ-DEMO-001 v4,
+005 v1, 006 v1, 007 v1), merged to main via PR #8. The close and Divide
+behaviour from this feedback (clear everything; "3 r 1"; nothing for ÷ 0) was
+then replaced by FB-0004 / CHG-0006, CHG-0007, CHG-0008.
