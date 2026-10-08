@@ -1,0 +1,27 @@
+id: CHG-0008
+raised: 2026-10-07
+stream: scope_change
+source: "FB-0004, message in build session 2026-10-07, Kartik Chandra Biswas"
+raw: "closebutton will close this and divition  will not show like (0 r 3434) the real result will be here, and div by zero will give a message with clearing rtesult"
+asks:
+  - "A3a Dividing by 0 shows a message: contradicts (REQ-DEMO-007@v1 c3 '5 and 0, Divide -> the answer label is empty', rationale 'Dividing by 0 has no Answer, so nothing is shown'; ANSWERS.md 2026-10-07 'What shows when dividing by 0?' > Show nothing, with friendly message offered and not chosen)"
+  - "A3b Dividing by 0 clears the result: partial. Clearing the answer label is already agreed and delivered (REQ-DEMO-007@v1 c3, test '5 and 0 then Divide leaves the answer label empty', passing on feat/multiply-divide-close). Clearing the text boxes as well, if 'result' includes them, is not covered by any criterion; only REQ-DEMO-005@v1 c1 clears text boxes, and only for the close button."
+affects: [REQ-DEMO-007]
+analysis:
+  dependants: []             # nothing depends_on REQ-DEMO-007
+  tests_invalidated: 2       # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-007@v1 (on feat/multiply-divide-close, not yet merged)
+  constraint: >-
+    A message in the answer label breaks REQ-DEMO-007@v1 c3; a message anywhere
+    else breaks its rationale and, as a separate element, REQ-DEMO-001@v4 c1
+    ("one answer label" and nothing else). A message in the label and a cleared
+    label pull against each other within the same ask.
+  open_before_build: >-
+    The message's exact words. Where it appears: in the answer label, or
+    elsewhere. Whether it stays until the next button press. Whether "clearing
+    result" means the answer label only, or the text boxes as well.
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-07."
+outcome:
+  - REQ-DEMO-007: v2
+  - REQ-DEMO-001: unchanged

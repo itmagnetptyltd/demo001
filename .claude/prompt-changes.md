@@ -214,3 +214,95 @@ Prompt: /feature-plan REQ-DEMO-004
 Files:
 - .brain/sessions/2026-10-07-plan-REQ-DEMO-004.md
 
+## 2026-10-07T11:31:20.877Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+## 2026-10-07T11:04:48.193Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0005.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+decision: and commercial: is updated, now what?
+
+Files:
+- .brain/requirements/demo.yaml
+
+## 2026-10-07T11:31:21.952Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+## 2026-10-07T11:04:49.262Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0005.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+decision: and commercial: is updated, now what?
+
+Files:
+- .brain/requirements/demo.yaml
+
+## 2026-10-07T11:31:34.641Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+## 2026-10-07T11:05:02.510Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0005.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+decision: and commercial: is updated, now what?
+
+Files:
+- .brain/glossary.md
+
+## 2026-10-07T11:31:35.723Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+
+Files:
+- .brain/glossary.md
+## 2026-10-07T11:07:12.667Z
+
+Prompt: /feature-plan REQ-DEMO-001
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-001-v4.md
+
+## 2026-10-07T11:14:51.736Z
+
+Prompt: /feature-plan REQ-DEMO-006 REQ-DEMO-007
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-006.md
+
+## 2026-10-07T11:14:56.479Z
+
+Prompt: /feature-plan REQ-DEMO-006 REQ-DEMO-007
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-007.md
+
+## 2026-10-07T11:19:12.702Z
+
+Prompt: /feature-plan REQ-DEMO-005
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-005.md
+
+## 2026-10-07T11:19:17.866Z
+
+Prompt: /feature-plan REQ-DEMO-005
+
+Files:
+- .brain/sessions/2026-10-07-plan-REQ-DEMO-005.md
+
+## 2026-10-08T08:01:06.114Z
+
+Prompt: /feature-plan REQ-DEMO-007
+
+Files:
+- .brain/sessions/2026-10-08-plan-REQ-DEMO-007-v2.md
+
+## 2026-10-08T08:05:00.443Z
+
+Prompt: /feature-plan REQ-DEMO-005
+
+Files:
+- .brain/sessions/2026-10-08-plan-REQ-DEMO-005-v2.md
+

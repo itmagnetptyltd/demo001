@@ -1,0 +1,29 @@
+id: CHG-0006
+raised: 2026-10-07
+stream: scope_change
+source: "FB-0004, message in build session 2026-10-07, Kartik Chandra Biswas"
+raw: "closebutton will close this and divition  will not show like (0 r 3434) the real result will be here, and div by zero will give a message with clearing rtesult"
+asks:
+  - "A1 The close button closes ('close this') instead of clearing: contradicts (REQ-DEMO-005@v1 title 'clears both text boxes and the answer label', c2 'the two text boxes, the four operation buttons, the close button and the answer label are still visible'; glossary Close button 'it does not close or hide anything'; ANSWERS.md 2026-10-07 'What should pressing the close (x) do?' > Clear everything, with hide and close-the-tab offered and not chosen)"
+affects: [REQ-DEMO-005]
+analysis:
+  dependants: []             # nothing depends_on REQ-DEMO-005
+  tests_invalidated: 2       # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-005@v1 (on feat/multiply-divide-close, not yet merged)
+  constraint: >-
+    Closing or hiding is the opposite of REQ-DEMO-005@v1 c2. REQ-DEMO-005 must be
+    superseded, and the glossary Close button (and possibly Calculator, 'There is
+    no other page') redefined. Browsers usually refuse to let a page close a tab
+    it did not open by script, so "close the tab" may do nothing in practice.
+  open_before_build: >-
+    What "this" is: the Calculator card (hidden), the page, or the browser tab.
+    What is shown afterwards, and how the Calculator comes back, since there is no
+    other page. The words may also be read as only describing the button, with
+    "clearing rtesult" belonging to it, which is today's behaviour; confirm which
+    is meant.
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-07."
+outcome:
+  - REQ-DEMO-005: v2
+  - REQ-DEMO-001: unchanged
+  - REQ-DEMO-007: unchanged

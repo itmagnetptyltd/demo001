@@ -55,20 +55,21 @@ box. Never negative, never a decimal.
 
 **Answer** — the result shown in the answer label after an operation button is
 pressed: the sum (Add), the first Number minus the second (Subtract), the
-product (Multiply), or the first Number divided by the second as a whole number
-followed by " r " and the remainder when the remainder is not 0, e.g. "3 r 1"
-(Divide). Unlike a Number, an Answer can be negative (CHG-0002). Dividing by 0
-has no Answer (CHG-0005).
+product (Multiply), or the first Number divided by the second, rounded to 2
+decimal places with no trailing zeros, e.g. "3.5", "0.69", "3" (Divide). Unlike
+a Number, an Answer can be negative (CHG-0002) and can be a decimal (CHG-0007).
+Dividing by 0 has no Answer; the answer label shows "Oops! You can't divide by
+zero" instead (CHG-0008).
 - **Also called:** the client says "answer", "addition", "substraction",
-  "multiply" and "Division".
+  "multiply", "Division" and "the real result".
 
 **Calculator** — the single page holding two text boxes, four operation buttons
 (Add, Subtract, Multiply, Divide), a close button and one answer label
 (CHG-0002, CHG-0003, CHG-0004, CHG-0005). There is no other page.
 
 **Close button** — the x in the top right corner of the Calculator's card. It
-clears both text boxes and the answer label; it does not close or hide anything
-(CHG-0003).
+asks the browser to close the tab; when the browser refuses, nothing changes. It
+does not clear anything (CHG-0006, replacing CHG-0003's "clears").
 - **Also called:** the client says "CLOSE (x)".
 
 ---
