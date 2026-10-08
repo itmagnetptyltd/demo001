@@ -4,38 +4,65 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-// @covers REQ-DEMO-001@v3
-test("the Calculator shows two text boxes, two buttons and one answer label", async ({
+const OPERATIONS = ["Add", "Subtract", "Multiply", "Divide"];
+
+const operationButton = (page, name) =>
+  page.getByRole("button", { name, exact: true });
+
+// @covers REQ-DEMO-001@v4
+test("the Calculator shows two text boxes, five buttons and one answer label", async ({
   page,
 }) => {
   await expect(page.getByRole("textbox")).toHaveCount(2);
-  await expect(page.getByRole("button")).toHaveCount(2);
+  await expect(page.getByRole("button")).toHaveCount(5);
   await expect(page.getByRole("status")).toHaveCount(1);
 });
 
-// @covers REQ-DEMO-001@v3
-test("one button reads Add and the other reads Subtract", async ({ page }) => {
-  await expect(
-    page.getByRole("button", { name: "Add", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Subtract", exact: true }),
-  ).toBeVisible();
-});
-
-// @covers REQ-DEMO-001@v3
-test("Add and Subtract sit side by side with Add on the left", async ({
+// @covers REQ-DEMO-001@v4
+test("the operation buttons read Add, Subtract, Multiply and Divide, and the close button shows an x", async ({
   page,
 }) => {
-  const add = await page
-    .getByRole("button", { name: "Add", exact: true })
-    .boundingBox();
-  const subtract = await page
-    .getByRole("button", { name: "Subtract", exact: true })
-    .boundingBox();
+  await expect(operationButton(page, "Add")).toHaveText("Add");
+  await expect(operationButton(page, "Subtract")).toHaveText("Subtract");
+  await expect(operationButton(page, "Multiply")).toHaveText("Multiply");
+  await expect(operationButton(page, "Divide")).toHaveText("Divide");
+  await expect(page.getByRole("button", { name: "Close" })).toHaveText("×");
+});
+
+// @covers REQ-DEMO-001@v4
+test("Add, Subtract, Multiply and Divide sit on one row in that order", async ({
+  page,
+}) => {
+  const [add, subtract, multiply, divide] = await Promise.all(
+    OPERATIONS.map((name) => operationButton(page, name).boundingBox()),
+  );
 
   expect(Math.abs(add.y - subtract.y)).toBeLessThanOrEqual(1);
+  expect(Math.abs(add.y - multiply.y)).toBeLessThanOrEqual(1);
+  expect(Math.abs(add.y - divide.y)).toBeLessThanOrEqual(1);
   expect(add.x + add.width).toBeLessThanOrEqual(subtract.x);
+  expect(subtract.x + subtract.width).toBeLessThanOrEqual(multiply.x);
+  expect(multiply.x + multiply.width).toBeLessThanOrEqual(divide.x);
+});
+
+// @covers REQ-DEMO-001@v4
+test("the close button sits in the top right corner of the card", async ({
+  page,
+}) => {
+  const card = await page.getByRole("main").boundingBox();
+  const close = await page.getByRole("button", { name: "Close" }).boundingBox();
+  const firstBox = await page
+    .getByRole("textbox", { name: "First Number" })
+    .boundingBox();
+
+  const cardRight = card.x + card.width;
+  expect(close.x).toBeGreaterThanOrEqual(card.x);
+  expect(close.y).toBeGreaterThanOrEqual(card.y);
+  expect(close.x + close.width).toBeLessThanOrEqual(cardRight);
+  expect(cardRight - (close.x + close.width)).toBeLessThan(
+    cardRight - (firstBox.x + firstBox.width),
+  );
+  expect(close.y).toBeLessThan(firstBox.y);
 });
 
 // @covers REQ-DEMO-003@v1
@@ -149,6 +176,107 @@ test("3 and 5 then Subtract shows -2", async ({ page }) => {
   await expect(page.getByRole("status")).toHaveText("-2");
 });
 
+async function typeNumbers(page, first, second) {
+  await page
+    .getByRole("textbox", { name: "First Number" })
+    .pressSequentially(first);
+  await page
+    .getByRole("textbox", { name: "Second Number" })
+    .pressSequentially(second);
+}
+
+// @covers REQ-DEMO-006@v1
+test("3 and 4 then Multiply shows 12", async ({ page }) => {
+  await typeNumbers(page, "3", "4");
+
+  await page.getByRole("button", { name: "Multiply", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText("12");
+});
+
+// @covers REQ-DEMO-006@v1
+test("0 and 5 then Multiply shows 0", async ({ page }) => {
+  await typeNumbers(page, "0", "5");
+
+  await page.getByRole("button", { name: "Multiply", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText("0");
+});
+
+// @covers REQ-DEMO-007@v1
+test("6 and 2 then Divide shows 3", async ({ page }) => {
+  await typeNumbers(page, "6", "2");
+
+  await page.getByRole("button", { name: "Divide", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText("3");
+});
+
+// @covers REQ-DEMO-007@v1
+test("7 and 2 then Divide shows 3 r 1", async ({ page }) => {
+  await typeNumbers(page, "7", "2");
+
+  await page.getByRole("button", { name: "Divide", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText("3 r 1");
+});
+
+// @covers REQ-DEMO-007@v1
+test("5 and 0 then Divide leaves the answer label empty", async ({ page }) => {
+  await typeNumbers(page, "5", "0");
+  await page.getByRole("button", { name: "Add", exact: true }).click();
+  await expect(page.getByRole("status")).toHaveText("5");
+
+  await page.getByRole("button", { name: "Divide", exact: true }).click();
+
+  await expect(page.getByRole("status")).toHaveText("");
+});
+
+// @covers REQ-DEMO-005@v1
+test("3 and 4, Add, then close empties both text boxes and the answer label", async ({
+  page,
+}) => {
+  await typeNumbers(page, "3", "4");
+  await page.getByRole("button", { name: "Add", exact: true }).click();
+  await expect(page.getByRole("status")).toHaveText("7");
+
+  await page.getByRole("button", { name: "Close" }).click();
+
+  await expect(page.getByRole("textbox", { name: "First Number" })).toHaveValue(
+    "",
+  );
+  await expect(
+    page.getByRole("textbox", { name: "Second Number" }),
+  ).toHaveValue("");
+  await expect(page.getByRole("status")).toHaveText("");
+});
+
+// @covers REQ-DEMO-005@v1
+test("after close, every control is still visible", async ({ page }) => {
+  await page.getByRole("button", { name: "Close" }).click();
+
+  await expect(
+    page.getByRole("textbox", { name: "First Number" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("textbox", { name: "Second Number" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Add", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Subtract", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Multiply", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Divide", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
+  await expect(page.getByRole("status")).toBeVisible();
+});
+
 const CONTROLS = [
   {
     name: "first text box",
@@ -171,6 +299,21 @@ const CONTROLS = [
     tag: "button",
   },
   {
+    name: "Multiply button",
+    find: (page) => page.getByRole("button", { name: "Multiply", exact: true }),
+    tag: "button",
+  },
+  {
+    name: "Divide button",
+    find: (page) => page.getByRole("button", { name: "Divide", exact: true }),
+    tag: "button",
+  },
+  {
+    name: "close button",
+    find: (page) => page.getByRole("button", { name: "Close" }),
+    tag: "button",
+  },
+  {
     name: "answer label",
     find: (page) => page.getByRole("status"),
     tag: "output",
@@ -186,20 +329,31 @@ function lookOf(element) {
   };
 }
 
-/** The column top to bottom; the two buttons share one row, measured as one box. */
+/**
+ * The column top to bottom; the four operation buttons share one row, measured
+ * as one box. The close button sits in the corner and is not part of the column.
+ */
 async function columnBoxes(page) {
-  const [first, second, add, subtract, answer] = await Promise.all(
-    CONTROLS.map((control) => control.find(page).boundingBox()),
+  const box = (locator) => locator.boundingBox();
+  const [first, second, answer] = await Promise.all([
+    box(page.getByRole("textbox", { name: "First Number" })),
+    box(page.getByRole("textbox", { name: "Second Number" })),
+    box(page.getByRole("status")),
+  ]);
+  const row = await Promise.all(
+    OPERATIONS.map((name) => box(operationButton(page, name))),
   );
+  const left = row[0];
+  const right = row[row.length - 1];
   const buttonRow = {
-    x: add.x,
-    y: Math.min(add.y, subtract.y),
-    width: subtract.x + subtract.width - add.x,
+    x: left.x,
+    y: Math.min(...row.map((button) => button.y)),
+    width: right.x + right.width - left.x,
   };
   return [first, second, buttonRow, answer];
 }
 
-// @covers REQ-DEMO-001@v3
+// @covers REQ-DEMO-001@v4
 test("the controls are stacked top to bottom in order", async ({ page }) => {
   const boxes = await columnBoxes(page);
 
@@ -209,7 +363,7 @@ test("the controls are stacked top to bottom in order", async ({ page }) => {
   expect(new Set(tops).size).toBe(boxes.length);
 });
 
-// @covers REQ-DEMO-001@v3
+// @covers REQ-DEMO-001@v4
 test("every control is centred on the page", async ({ page }) => {
   const pageCentre =
     (await page.evaluate(() => document.documentElement.clientWidth)) / 2;
@@ -222,7 +376,7 @@ test("every control is centred on the page", async ({ page }) => {
   expect(Math.max(...offsets)).toBeLessThanOrEqual(1);
 });
 
-// @covers REQ-DEMO-001@v3
+// @covers REQ-DEMO-001@v4
 test("the page background is not plain white", async ({ page }) => {
   const background = await page.evaluate(() => {
     const style = getComputedStyle(document.body);
@@ -236,7 +390,7 @@ test("the page background is not plain white", async ({ page }) => {
 });
 
 for (const control of CONTROLS) {
-  // @covers REQ-DEMO-001@v3
+  // @covers REQ-DEMO-001@v4
   test(`the ${control.name} does not look like the browser default`, async ({
     page,
     context,

@@ -2,7 +2,10 @@
   title: A single page shows two text boxes, four operation buttons, a close button and one answer label
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 4
   source: >-
     BRIEF.md 2026-10-01 — "single page application ... just two text box and a
@@ -228,14 +231,18 @@
       summary: >-
         v1 said pressing the close button clears both text boxes and the answer
         label, and everything stays visible (the client's answer "Clear
-        everything"). Superseded by CHG-0006 (absorbed), which makes it try to
-        close the tab instead.
+        everything"). Verified by tests/calculator.spec.js and
+        e2e/calculator.spec.js. Superseded by CHG-0006 (absorbed), which makes
+        it try to close the tab instead.
 
 - id: REQ-DEMO-006
   title: Pressing the Multiply button shows the first Number times the second in the answer label
   module: DEMO
   priority: must
-  status: agreed
+  status: verified
+  verified_by:
+    - e2e/calculator.spec.js
+    - tests/calculator.spec.js
   version: 1
   source: >-
     CHG-0004 (FB-0003, 2026-10-07) — "add multiply"; clarified by Kartik Chandra
@@ -303,5 +310,6 @@
       summary: >-
         v1 showed a whole number and remainder ("3 r 1"; "3" when exact) and an
         empty answer label when dividing by 0 (the client's answers "3 r 1" and
-        "Show nothing"). Superseded by CHG-0007 (decimal, 2 places) and CHG-0008
+        "Show nothing"). Verified by tests/calculator.spec.js and
+        e2e/calculator.spec.js. Superseded by CHG-0007 (decimal, 2 places) and CHG-0008
         (a message for dividing by 0), both absorbed.

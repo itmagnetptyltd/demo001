@@ -10,6 +10,10 @@
   --orange: #ff8a3d;
   --orange-deep: #e5671a;
   --lemon-fill: #fff9db;
+  --teal: #1fb89a;
+  --teal-deep: #138a72;
+  --berry: #ff5c8a;
+  --berry-deep: #d93a68;
   --control-width: 100%;
   --font-friendly: "Comic Sans MS", "Chalkboard SE", "Segoe UI Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
 }
@@ -30,8 +34,9 @@ body {
 }
 
 main {
-  width: min(90vw, 360px);
-  padding: 28px 24px 32px;
+  position: relative;
+  width: min(92vw, 400px);
+  padding: 28px clamp(16px, 5vw, 24px) 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,13 +94,14 @@ button {
 .buttons {
   width: var(--control-width);
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 
 .buttons button {
-  flex: 1;
+  flex: 1 1 auto;
   min-width: 0;
-  padding-inline: 8px;
+  padding-inline: clamp(4px, 1.5vw, 8px);
+  font-size: clamp(0.8rem, 3.6vw, 1rem);
 }
 
 #subtract {
@@ -106,6 +112,46 @@ button {
 
 #subtract:active {
   box-shadow: 0 2px 0 var(--grape-deep);
+}
+
+#multiply {
+  background: var(--teal);
+  border-color: var(--teal-deep);
+  box-shadow: 0 6px 0 var(--teal-deep);
+}
+
+#multiply:active {
+  box-shadow: 0 2px 0 var(--teal-deep);
+}
+
+#divide {
+  background: var(--berry);
+  border-color: var(--berry-deep);
+  box-shadow: 0 6px 0 var(--berry-deep);
+}
+
+#divide:active {
+  box-shadow: 0 2px 0 var(--berry-deep);
+}
+
+#close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--lemon-fill);
+  border: 2px solid var(--ink);
+  box-shadow: none;
+}
+
+#close:active {
+  box-shadow: none;
 }
 
 button:hover {
