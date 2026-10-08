@@ -1,0 +1,26 @@
+id: CHG-0007
+raised: 2026-10-07
+stream: scope_change
+source: "FB-0004, message in build session 2026-10-07, Kartik Chandra Biswas"
+raw: "closebutton will close this and divition  will not show like (0 r 3434) the real result will be here, and div by zero will give a message with clearing rtesult"
+asks:
+  - "A2 Divide shows 'the real result' instead of a whole number and remainder such as '0 r 3434': contradicts (REQ-DEMO-007@v1 title 'as a whole number and remainder', c2 '7 and 2 -> 3 r 1'; glossary Answer 'a whole number followed by \" r \" and the remainder'; ANSWERS.md 2026-10-07 'What shows when dividing gives a part number, e.g. 7 ÷ 2?' > 3 r 1, with 3.5 offered and not chosen). '0 r 3434' is the agreed rule for 3434 divided by a larger Number, checked against the delivered divideNumbers; 3434 / 2 gives 1717, so it is not a wrong result."
+affects: [REQ-DEMO-007]
+analysis:
+  dependants: []             # nothing depends_on REQ-DEMO-007
+  tests_invalidated: 2       # tests/calculator.spec.js and e2e/calculator.spec.js pin REQ-DEMO-007@v1 (on feat/multiply-divide-close, not yet merged)
+  constraint: >-
+    REQ-DEMO-007@v1 (title, rationale, c2, possibly c1) and the glossary Answer
+    must be superseded. The brief says "whole number not decimal"; REQ-DEMO-003
+    and the glossary Number read that as about input only, but if it also covered
+    Answers, a decimal Answer goes against the brief too.
+  open_before_build: >-
+    What "the real result" is: a decimal (how many places, rounded or cut off), a
+    fraction, or something else. Whether it applies to every division or only when
+    the whole part is 0. Whether an exact result (6 / 2) still shows "3".
+  estimate: ""
+decision: absorbed
+commercial: "Absorbed, no charge. Decided by Kartik Chandra Biswas in build session 2026-10-07."
+outcome:
+  - REQ-DEMO-007: v2
+  - REQ-DEMO-001: unchanged

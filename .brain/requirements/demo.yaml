@@ -195,31 +195,41 @@
   belts: [A, B]
 
 - id: REQ-DEMO-005
-  title: Pressing the close button clears both text boxes and the answer label
+  title: Pressing the close button asks the browser to close the tab
   module: DEMO
   priority: must
   status: agreed
-  version: 1
+  version: 2
   source: >-
     CHG-0003 (FB-0003, 2026-10-07) — "ADD A CLOSE (x) ON TOP RIGHT corner";
-    clarified by Kartik Chandra Biswas in build session 2026-10-07 (clear
-    everything; the Calculator stays on screen)
+    CHG-0006 (FB-0004, 2026-10-07) — "closebutton will close this"; clarified by
+    Kartik Chandra Biswas in build session 2026-10-07 (try to close the tab,
+    chosen knowing browsers usually refuse for a tab the user opened)
   rationale: >-
-    There is no other page to close to. The close (x) lets a child start again:
-    it empties the Calculator rather than hiding it.
+    The client wants the x to close the Calculator's tab. A page can only ask;
+    browsers close a tab only when a script opened it, and otherwise ignore the
+    request. When the browser refuses, nothing happens and the Calculator stays
+    as it was. That trade-off was chosen knowingly.
   acceptance:
-    - given: The first text box holds 3, the second holds 4, and Add has been pressed so the answer label shows 7
+    - given: The Calculator is open in a tab the browser lets the page close
       when: The close button is pressed
-      then: Both text boxes are empty and the answer label is empty
-    - given: The close button has been pressed
-      when: The page is looked at
-      then: >-
-        The two text boxes, the four operation buttons, the close button and the
-        answer label are still visible
+      then: The tab closes
+    - given: The first text box holds 3, the second holds 4, and Add has been pressed so the answer label shows 7
+      when: The close button is pressed in a tab the browser will not let the page close
+      then: The text boxes still hold 3 and 4 and the answer label still shows 7
   ambiguities: []
   depends_on:
     - REQ-DEMO-001
   belts: [A, B]
+  history:
+    - version: 1
+      agreed: 2026-10-07
+      superseded_by: 2
+      summary: >-
+        v1 said pressing the close button clears both text boxes and the answer
+        label, and everything stays visible (the client's answer "Clear
+        everything"). Superseded by CHG-0006 (absorbed), which makes it try to
+        close the tab instead.
 
 - id: REQ-DEMO-006
   title: Pressing the Multiply button shows the first Number times the second in the answer label
@@ -245,31 +255,53 @@
   belts: [A, B]
 
 - id: REQ-DEMO-007
-  title: Pressing the Divide button shows the first Number divided by the second, as a whole number and remainder
+  title: Pressing the Divide button shows the first Number divided by the second, rounded to 2 decimal places
   module: DEMO
   priority: must
   status: agreed
-  version: 1
+  version: 2
   source: >-
-    CHG-0005 (FB-0003, 2026-10-07) — "add ... Division"; clarified by Kartik
-    Chandra Biswas in build session 2026-10-07 (7 ÷ 2 shows "3 r 1"; 6 ÷ 2 shows
-    "3"; dividing by 0 shows nothing)
+    CHG-0005 (FB-0003, 2026-10-07) — "add ... Division"; CHG-0007 and CHG-0008
+    (FB-0004, 2026-10-07) — "divition will not show like (0 r 3434) the real
+    result will be here, and div by zero will give a message with clearing
+    rtesult"; clarified by Kartik Chandra Biswas in build session 2026-10-07
+    (decimal, 2 places; message "Oops! You can't divide by zero"; nothing else
+    cleared)
   rationale: >-
-    The Numbers are whole, and a child learns division as a whole number and a
-    remainder. The remainder is shown only when it is not 0. Dividing by 0 has no
-    Answer, so nothing is shown.
+    The client wants the real result of a division, as a decimal rounded to 2
+    places with no trailing zeros, so an exact result still shows as a whole
+    number. Dividing by 0 has no Answer; the answer label shows a friendly
+    message instead, and the text boxes are left as they are.
   acceptance:
     - given: The first text box holds 6 and the second holds 2
       when: The Divide button is pressed
       then: The answer label shows 3
     - given: The first text box holds 7 and the second holds 2
       when: The Divide button is pressed
-      then: The answer label shows 3 r 1
+      then: The answer label shows 3.5
+    - given: The first text box holds 3434 and the second holds 5000
+      when: The Divide button is pressed
+      then: The answer label shows 0.69
+    - given: The first text box holds 1 and the second holds 3
+      when: The Divide button is pressed
+      then: The answer label shows 0.33
     - given: The first text box holds 5 and the second holds 0
       when: The Divide button is pressed
-      then: The answer label is empty
+      then: The answer label shows "Oops! You can't divide by zero"
+    - given: The first text box holds 5 and the second holds 0
+      when: The Divide button is pressed
+      then: The text boxes still hold 5 and 0
   ambiguities: []
   depends_on:
     - REQ-DEMO-001
     - REQ-DEMO-003
   belts: [A, B]
+  history:
+    - version: 1
+      agreed: 2026-10-07
+      superseded_by: 2
+      summary: >-
+        v1 showed a whole number and remainder ("3 r 1"; "3" when exact) and an
+        empty answer label when dividing by 0 (the client's answers "3 r 1" and
+        "Show nothing"). Superseded by CHG-0007 (decimal, 2 places) and CHG-0008
+        (a message for dividing by 0), both absorbed.

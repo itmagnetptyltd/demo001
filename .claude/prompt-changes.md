@@ -214,3 +214,35 @@ Prompt: /feature-plan REQ-DEMO-004
 Files:
 - .brain/sessions/2026-10-07-plan-REQ-DEMO-004.md
 
+## 2026-10-07T11:31:20.877Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+
+Files:
+- .brain/requirements/demo.yaml
+
+## 2026-10-07T11:31:21.952Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+
+Files:
+- .brain/requirements/demo.yaml
+
+## 2026-10-07T11:31:34.641Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+
+Files:
+- .brain/glossary.md
+
+## 2026-10-07T11:31:35.723Z
+
+Prompt: <ide_opened_file>The user opened the file d:\practice\demo001\.brain\changes\CHG-0008.yaml in the IDE. This may or may not be related to the current task.</ide_opened_file>
+doen now what after updating decision: and commercial: which step
+
+Files:
+- .brain/glossary.md
+

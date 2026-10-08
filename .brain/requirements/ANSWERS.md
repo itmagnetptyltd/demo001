@@ -48,3 +48,22 @@ Answered 2026-10-07 by Kartik Chandra Biswas, build session, choosing from liste
   > 3
 
 Also decided: CHG-0003, CHG-0004 and CHG-0005 "Absorbed, no charge".
+
+## CHG-0006, CHG-0007, CHG-0008: close, real Divide result, divide by 0 (FB-0004)
+
+Answered 2026-10-07 by Kartik Chandra Biswas, build session, choosing from listed options.
+
+- What should the close (x) do now? (hide the Calculator / try to close the tab, which browsers usually ignore for a tab the user opened / keep clearing)
+  > Try to close the tab
+- How should Divide show a result that isn't whole, e.g. 7 ÷ 2 or 3434 ÷ 5000? (decimal, 2 places / decimal, 4 places / full decimal)
+  > Decimal, 2 places
+- What does dividing by 0 show? ("Can't divide by 0" / "Oops! You can't divide by zero", both in the answer label)
+  > "Oops! You can't divide by zero"
+- What does dividing by 0 clear? (both text boxes / second box only / nothing else)
+  > Nothing else
+
+These replace the answers recorded above for CHG-0003 ("Clear everything") and
+CHG-0005 ("3 r 1", "Show nothing"). Those answers stay as the record of what was
+agreed at the time.
+
+Also decided: CHG-0006, CHG-0007 and CHG-0008 "Absorbed, no charge".
